@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--타임리프 템플릿 엔진을 불러오려면 xmlns~어쩌구를 불러와줘야함-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<p th:text="'안녕하세요. '+${msg}">안녕 반가워!</p>-->
+<!--타임리프 템플릿 엔진에서는 안녕반가워가 보이는게 아니라 태그 안의 내용이 보인다.-->
+<!--타임 리프 표현식과 문법-->
+<p th:text="'안녕하세요'+${hello}">스프링 어저구</p>
+<p th:utext="${uText}">zzz</p>
+<input type="text" th:value="${value}">
+<p th:with="temp=${withValue}" th:text="${temp}"></p>
+<a th:href="@{/{id}(id=${link})}">Link 1</a><br>
+<a th:href="@{/hi}">Link 2(hi)</a><br>
+<a th:href="@{https://www.google.com}">Google</a><br>
+<img th:src="${imgSrc}">
+
+<div th:switch="${userRole}">
+    <p th:case="'admin'">Hello,Admin</p>
+    <p th:case="'user'">Hello,User</p>
+    <p th:case="'8'">Hello,Unknown</p>
+</div>
+<div>
+    <p th:if="${isAdmin}">Welcome,Admin</p>
+    <p th:unless="${isAdmin}">Welcome,User</p>
+</div>
+<ul>
+    <li th:each="name:${names}" th:text="${name}"></li>
+</ul>
+<div th:text="${classHello.getAge()}"></div>
+
+</body>
+</html>

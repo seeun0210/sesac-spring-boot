@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>People</title>
+  <style>
+    table {
+        border-collapse: collapse;
+        width: 50%;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+<h2>People List</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="person : ${people}">
+    <td th:text="${person.getName()}"></td>
+    <td th:text="${person.getAge()}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
