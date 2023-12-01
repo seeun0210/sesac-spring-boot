@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입 폼</title>
+</head>
+<body>
+
+<form action="/submit" method="post">
+  <h3>회원가입</h3>
+
+  <label for="name">이름:</label>
+  <input type="text" id="name" name="name" required>
+  <br>
+
+  <label>성별:</label>
+  <input type="radio" id="male" name="gender" value="male">
+  <label for="male">남성</label>
+  <input type="radio" id="female" name="gender" value="female">
+  <label for="female">여성</label>
+  <br>
+
+  <label for="dob">생년월일:</label>
+  <input type="date" id="dob" name="dob" required>
+  <br>
+
+  <label>관심사:</label>
+  <input type="checkbox" id="sports" name="interests" value="sports">
+  <label for="sports">스포츠</label>
+  <input type="checkbox" id="music" name="interests" value="music">
+  <label for="music">음악</label>
+  <input type="checkbox" id="movies" name="interests" value="movies">
+  <label for="movies">영화</label>
+  <br>
+
+  <input type="submit" value="회원가입">
+</form>
+
+</body>
+</html>

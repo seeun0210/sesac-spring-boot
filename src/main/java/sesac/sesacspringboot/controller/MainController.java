@@ -2,11 +2,10 @@ package sesac.sesacspringboot.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+// @RestController: Controller 면서 모든 메소드가 @ResponseBody를 갖도록 하는 친구
 public class MainController {
     @GetMapping("/api")
     public String getApi(){return "request";}
@@ -58,5 +57,54 @@ public class MainController {
         model.addAttribute("age",age);
         return "response";
     }
+
+    //////////////////////////////
+    //post로 값을 전달할 때 그 값을 controller에서 받는 방법은 @RequestParam
+    @PostMapping("/post/response1")
+    public String postResponse1(@RequestParam(value="name")String name, Model model){
+        model.addAttribute("name",name);
+        return "response";
+    }
+    @PostMapping("/post/response2")
+    public String postResponse2(@RequestParam(value="name",required = false)String name, Model model){
+        model.addAttribute("name",name);
+        return "response";
+    }
+    @PostMapping("/post/response3")
+    @ResponseBody //res.send
+    // return 하는 문자열의 template 파일을 불러오는 게 아니라
+    // return 하는 문자열 그대로 값을 전달하는 것
+    public String postResponse3(@RequestParam(value="name",required = false)String name, Model model){
+        model.addAttribute("name",name);
+        return name+"님 안녕하세요!";
+    }
+    @GetMapping("/signup")
+    public String getPractice(){
+        return "signup";
+    };
+    @PostMapping("/signup")
+    @ResponseBody
+    public String postPractice(
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "gender") String gender,
+            @RequestParam(value = "dob") String dob,
+            @RequestParam(value = "interests") String interest,
+            Model model) {
+
+
+        String response = "이름: " + name + "<br>" +
+                "성별: " + gender + "<br>" +
+                "생년월일: " + dob + "<br>" +
+                "관심사: " + interest;
+
+
+        model.addAttribute("userInfo", response);
+
+
+        return response;
+    }
+
+
+
 
 }
