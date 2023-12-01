@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원가입 폼</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
-<form action="/submit" method="post">
+<form id="signupForm">
   <h3>회원가입</h3>
 
   <label for="name">이름:</label>
@@ -34,8 +35,38 @@
   <label for="movies">영화</label>
   <br>
 
-  <input type="submit" value="회원가입">
+  <!-- 버튼을 <button> 요소로 변경하고 onclick 이벤트를 추가 -->
+  <button type="button" onclick="submitForm()">회원가입</button>
 </form>
+
+<script>
+  function submitForm() {
+    var formData = new FormData(document.getElementById('signupForm'));
+
+    var data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    axios.post('/signup', data)
+      .then(function (response) {
+        console.log(response.data);
+        console.log(`${response.data.name}님 회원가입 성공`);
+        // Assuming you have a token in the response, you can use it for the patch request
+        var token = response.data.token;
+
+
+<!--        axios.patch('/signup', data)-->
+<!--          .then(function (res) {-->
+<!--            console.log(res.data);-->
+<!--            console.log(`${res.data.name}님 회원정보 수정 성공`);-->
+<!--          })-->
+<!--          .catch(function (error) {-->
+<!--            console.error('Error submitting patch request:', error);-->
+<!--          });-->
+
+  }
+</script>
 
 </body>
 </html>
